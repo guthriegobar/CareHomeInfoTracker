@@ -1,7 +1,27 @@
+using CareHomeInfoTracker.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Authentication Service
+builder.Services.AddAuthentication().AddCookie("CookieAuth", options => 
+{
+    options.Cookie.Name = "CookieAuth";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+});
+
+//Database Connection
+var connectionString = builder.Configuration["ConnectionStrings:CareHomeInfoContext"];
+builder.Services.AddDbContext<CareHomeInfoContext>(
+        options => options.UseNpgsql(connectionString)
+    );
 
 var app = builder.Build();
 
