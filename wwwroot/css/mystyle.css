@@ -1,0 +1,129 @@
+﻿body {
+	font-size: 1.2rem;
+	background-color: rgb(255, 243, 243, 0.77);
+	/*background-color: rgb(208, 193, 215, 0.47)*/
+	color: rgb(152, 141, 134);
+}
+
+
+
+.own-container-main {
+	display: grid;
+	/*grid-auto-flow: column;*/
+	/*grid-template-columns: 20vw 70vw;*/
+	grid-template-columns: 2fr 8fr;
+	gap: 1rem;
+}
+
+.box-main {
+	overflow-x:hidden;
+}
+
+.res-profile {
+	width: 20vw;
+	height: 20vw;
+	float: left;
+	padding: 0;
+	margin-inline: 1em;
+}
+
+.no-margin {
+	margin:0;
+}
+
+.main-container {
+	margin:2rem;
+}
+
+.nav-item .nav-active {
+	background-color: rgb(214, 205, 202);
+	color: rgb(136, 127, 122);
+}
+
+.nav-item a {
+	color: rgb(152, 141, 134);
+	background-color: rgb(246, 236, 232);
+	margin: 0.1rem;
+	border: 2px solid rgb(246, 236, 232);
+	border-radius: 0.5rem;
+}
+
+.nav-item a:hover {
+	background-color: rgb(235, 221, 221);
+	color: rgb(180, 165, 159);
+	border-color: rgb(180, 165, 159);
+}
+
+
+
+/*.navbar .nav-item .nav-link {
+	color: rgb(143, 243, 21);
+}*/
+
+.btn-theme {
+	color: rgb(180, 165, 159);
+	border-color: rgb(180, 165, 159);
+	background-color:rgb(255, 255, 255)
+}
+
+.btn-theme:hover {
+	color: rgb(244, 247, 253);
+	background-color: rgb(180, 165, 159);
+	border-color: rgb(180, 165, 159);
+}
+
+.table {
+	font-size: 1rem;
+	overflow-x: auto;
+	white-space: nowrap;
+	color: inherit;
+}
+
+.table,
+.table th {
+    color: inherit;
+}
+
+.table-container {
+	overflow-x: auto;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.table-stick {
+	position:sticky;
+	left:0;
+}
+
+footer {
+	font-size: 0.8rem;
+}
+
+.welcome-header {
+	font-weight:350;
+}
+
+.login-form {
+	font-size: 1.1rem;
+	padding: 1rem;
+	width: 50%;
+	margin: 2rem auto;
+	box-sizing: border-box;
+	color: rgb(123, 108, 107);
+	font-weight:500;
+	border-radius:1em;
+	background-color: rgb(211, 222, 246)
+}
+
+a {
+	text-decoration: double;
+	color: rgb(39, 140, 255, 0.65);
+}
+
+a:hover {
+	color: rgb(255, 39, 39, 0.65);
+}
+
+div .form-group {
+	margin: 0.4rem;
+}

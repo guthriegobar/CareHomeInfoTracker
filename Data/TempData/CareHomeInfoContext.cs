@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using CareHomeInfoTracker.Models;
+using CareHomeInfoTracker.Models.TempModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace CareHomeInfoTracker.Data;
+namespace CareHomeInfoTracker.Data.TempData;
 
 public partial class CareHomeInfoContext : DbContext
 {

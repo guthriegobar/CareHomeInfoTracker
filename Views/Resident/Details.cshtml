@@ -1,0 +1,75 @@
+﻿@model CareHomeInfoTracker.Models.Resident
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="own-container-main">
+    <div class="box-main">
+        @* <img class="res-profile" src="~/imgs/res-placeholder.jpeg" /> *@
+        <img class="res-profile" src="@($"/Bucket/Images/{Model.ImgLocation}")" onerror="this.onerror=null;this.src='/Bucket/Images/profile_icon.jpg';" alt = "Resident Photo"/>
+    </div>
+    @* <btn class="btn btn-outline-dark">Weight Chart</btn>
+    <btn class="btn btn-outline-dark">Add Weight</btn> *@
+    <div class="box-main">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 d-sm-inline-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" onclick="ChartOrDetail(0);">Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" onclick="ChartOrDetail(1);">Weight Chart</a> @* asp-action="IndividualChart" asp-route-id="@Model.Id" *@
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div id="detailChartPartial" class="table-container">
+            @* <partial name="_ResDetailPartial" /> *@
+            <partial name="_ResDetailPartial" model="@Model" />
+            @* @await Html.PartialAsync("~/Views/Folder/_PartialName.cshtml") *@
+            @* @await Html.PartialAsync("/Views/Folder/_PartialName.cshtml") *@
+        </div>
+    </div>
+</div>
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    <script>
+
+        function ChartOrDetail(chart){
+            if(chart === 1){
+                $.ajax({
+                    url: "/Resident/ChartOrDetail", // Calls the corresponding controller action
+                    type: "GET",
+                    data: {id: @Model.Id, chart: 1},
+                    success: function (response) {
+                        $("#detailChartPartial").html(response); // Replace content dynamically
+                    },
+                    error: function () {
+                        alert("Error loading the view.");
+                    }
+                });
+            }
+            else{
+                $.ajax({
+                url: "/Resident/ChartOrDetail", // Calls the corresponding controller action
+                type: "GET",
+                data: {id: @Model.Id},
+                success: function (response) {
+                    $("#detailChartPartial").html(response); // Replace content dynamically
+                },
+                error: function () {
+                    alert("Error loading the view.");
+                }
+            });
+            }
+            
+            // $("#detailChartPartial").load('/Resident/ChartOrDetail/id=2');
+        }
+    </script>
+}

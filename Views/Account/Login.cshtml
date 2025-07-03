@@ -1,0 +1,44 @@
+﻿@model CareHomeInfoTracker.Models.ViewModels.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container border login-form">
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row" style="padding:10px">
+            <div class="col-2">
+                <label asp-for="Id"></label>
+            </div>
+            <div class="">
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row" style="padding:10px">
+            <div class="col-2">
+                <label asp-for="Password"></label>
+            </div>
+            <div class="">
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        @if (ViewBag.InvalidUserPassword != null) {
+            <div>
+                <span class="text-danger">Inavlid Username or Password!</span>
+            </div>
+        }
+        <div class="form-group row" style="padding:10px">
+            <div class="form-group">
+                <input type="submit" value="Log In" class="btn btn-primary" />
+            </div>
+        </div>
+        <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]"  readonly/>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

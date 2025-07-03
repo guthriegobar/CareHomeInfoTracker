@@ -1,0 +1,11 @@
+﻿@if (User == null || User.Identity == null || User.Identity.IsAuthenticated)
+{
+	<form method="post" class="form-check-inline" asp-controller="Account" asp-action="Logout">
+		@User?.Identity?.Name
+		<button type="submit" class="m-lg-2 btn btn-theme">Log Out</button>
+	</form>
+}
+else
+{
+	<a class="btn btn-theme" asp-controller="Account" asp-action="Login">Log In</a>
+}

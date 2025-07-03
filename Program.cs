@@ -1,16 +1,21 @@
 using CareHomeInfoTracker.Data;
+using CareHomeInfoTracker.Services.ImageFiles;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// File Upload service.
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+
 // Authentication Service
 builder.Services.AddAuthentication().AddCookie("CookieAuth", options => 
 {
     options.Cookie.Name = "CookieAuth";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromHours(2);
 });
 builder.Services.AddAuthorization(options =>
 {
@@ -39,6 +44,17 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider( Path.Combine(builder.Environment.ContentRootPath, "Images")),
+    RequestPath = "/Images"
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(@"D:\\MeroBucket"),
+    RequestPath = "/Bucket"
+});
 
 app.MapControllerRoute(
     name: "default",

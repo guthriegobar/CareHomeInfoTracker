@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CareHomeInfoTracker.Models;
+namespace CareHomeInfoTracker.Models.TempModels;
 
 public partial class SystemUser
 {
