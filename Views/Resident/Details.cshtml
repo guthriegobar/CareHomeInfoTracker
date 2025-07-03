@@ -14,12 +14,12 @@
     <div class="box-main">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1 d-sm-inline-flex">
+                <ul id="chart_detail_ul" class="navbar-nav flex-grow-1 d-sm-inline-flex">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" onclick="ChartOrDetail(0);">Details</a>
+                        <a class="nav-link" onclick="ChartOrDetail(this, 0);">Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" onclick="ChartOrDetail(1);">Weight Chart</a> @* asp-action="IndividualChart" asp-route-id="@Model.Id" *@
+                        <a class="nav-link" onclick="ChartOrDetail(this, 1);">Weight Chart</a> @* asp-action="IndividualChart" asp-route-id="@Model.Id" *@
                     </li>
                 </ul>
             </div>
@@ -40,8 +40,12 @@
 
 @section Scripts {
     <script>
+        function toggle_nav_link(element){
+            $('#chart_detail_ul .nav-link.nav-active').removeClass('nav-active');
+            element.classList.add('nav-active');
+        }
 
-        function ChartOrDetail(chart){
+        function ChartOrDetail(element, chart){
             if(chart === 1){
                 $.ajax({
                     url: "/Resident/ChartOrDetail", // Calls the corresponding controller action
@@ -49,6 +53,7 @@
                     data: {id: @Model.Id, chart: 1},
                     success: function (response) {
                         $("#detailChartPartial").html(response); // Replace content dynamically
+                        toggle_nav_link(element);
                     },
                     error: function () {
                         alert("Error loading the view.");
@@ -62,6 +67,7 @@
                 data: {id: @Model.Id},
                 success: function (response) {
                     $("#detailChartPartial").html(response); // Replace content dynamically
+                    toggle_nav_link(element);
                 },
                 error: function () {
                     alert("Error loading the view.");

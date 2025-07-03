@@ -42,6 +42,8 @@ namespace CareHomeInfoTracker.Controllers
                 return NotFound();
             }
 
+            ViewData["ResDetailToggle"] = "WeightChart";
+
             var resident = await _context.Residents
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (resident == null)
@@ -69,9 +71,11 @@ namespace CareHomeInfoTracker.Controllers
 
             if(chart == 0)
             {
+                ViewData["ResDetailToggle"] = "Details";
                 return PartialView("_ResDetailPartial", resident);
             }
 
+            ViewData["ResDetailToggle"] = "WeightChart";
             var weightHistory = _context.WeightHistories
                 .Where(x => x.Resident == resident)
                 .OrderByDescending(x => x.RecordedDate)
